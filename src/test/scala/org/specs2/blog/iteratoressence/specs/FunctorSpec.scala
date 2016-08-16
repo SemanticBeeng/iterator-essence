@@ -18,9 +18,9 @@ class FunctorSpec extends mutable.Specification {
 
     type λ[A] = (Int, A)
 
-    val p1: λ[String] = (2, "3")
+    val p1: λ[String] = Tuple2(2, "3")
     val p2: (Int, String) = p1
 
-    p must_== (2, "3")
+    p1 must_== Tuple2(2, "3")
   }
 }
