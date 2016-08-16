@@ -39,7 +39,7 @@ object Functor {
     def fmap[A, B](f: A => B) = (c: F1[F2[A]]) => f1.fmap[F2[A], F2[B]](f2value => f2.fmap(f).apply(f2value)).apply(c)
   }
 
-  implicit def Tuple2IsFunctor[X] = new Functor[({type λ[A] = Tuple2[X, A]})#λ] {
-    def fmap[A, B](f : A => B) : Tuple2[X, A] => Tuple2[X, B]  = (t: Tuple2[X, A]) => Tuple2(t._1, f(t._2))
+  implicit def Tuple2IsFunctor[X] = new Functor[({type λ[A] = (X, A)})#λ] {
+    def fmap[A, B](f : A => B) : ((X, A)) => ((X, B)) = (t: (X, A)) => Tuple2(t._1, f(t._2))
   }
 }
