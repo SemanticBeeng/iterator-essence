@@ -1,16 +1,15 @@
-package org.specs2
-package blog
-package iteratoressence
-import scalaz._
-import scalaz.Monoid._
-import scalaz.Zero._
-import scalaz.Semigroup._
-import Traversable._
-import Applicative._
+package org.specs2.blog.iteratoressence.specs
+
+import org.specs2.blog.iteratoressence.scalaz._
+import org.specs2.blog.iteratoressence.scalaz.Traversable._
+import org.specs2.blog.iteratoressence.scalaz.Semigroup._
+import org.specs2.blog.iteratoressence.scalaz.Zero._
+import org.specs2.blog.iteratoressence.scalaz.Monoid._
+import org.specs2.mutable
 
 /**
  * code to test the answer to https://gist.github.com/1046228
- * 
+ *
  * and also to: http://stackoverflow.com/questions/7142514/in-scala-how-can-i-do-the-equivalent-of-an-sql-sum-and-group-by
  */
 class MapOfMapsSpec extends mutable.Specification {
@@ -29,7 +28,7 @@ class MapOfMapsSpec extends mutable.Specification {
 
     map1.reduceMonoid(Map(_)) must_== Map("a" -> 3, "b" -> 8, "c" -> 4)
   }
-  
+
   "I sort events per day, place and sum the goods and bads" >> {
     events.reduceMonoid(e => Map(e.day -> Map(e.placeId -> DaySummary.fromBool(e.good)))) must_==
       Map(1 -> Map(100 -> DaySummary(2, 1),

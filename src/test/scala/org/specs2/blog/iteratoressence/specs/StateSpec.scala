@@ -1,8 +1,7 @@
-package org.specs2.blog
-package iteratoressence
+package org.specs2.blog.iteratoressence.specs
 
+import org.specs2.blog.iteratoressence.scalaz.State._
 import org.specs2.mutable.Specification
-import scalaz.State._
 
 class StateSpec extends Specification {
 

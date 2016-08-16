@@ -2,6 +2,8 @@ package org.specs2.blog
 package iteratoressence
 package scalaz
 
+import scala.language.reflectiveCalls
+
 trait Functor[F[_]] {
   def fmap[A, B](f: A => B): F[A] => F[B]
 }
@@ -37,4 +39,7 @@ object Functor {
     def fmap[A, B](f: A => B) = (c: F1[F2[A]]) => f1.fmap[F2[A], F2[B]](f2value => f2.fmap(f).apply(f2value)).apply(c)
   }
 
+  implicit def Tuple2IsFunctor[X] = new Functor[({type Tuple2X[A] = Tuple2[X, A]})#Tuple2X] {
+    def fmap[A, B](f : A => B) : Tuple2[X, A] => Tuple2[X, B]  = (t: Tuple2[X, A]) => Tuple2(t._1, f(t._2))
+  }
 }

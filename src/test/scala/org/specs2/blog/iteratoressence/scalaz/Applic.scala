@@ -16,7 +16,10 @@ object Applic {
     val f1 = implicitly[Applic[F1]]
     val f2 = implicitly[Applic[F2]]
 
-    def applic[A, B](f: Product[F1, F2, A => B]) = (c: Product[F1, F2, A]) => Product[F1, F2, B](f1.applic(f.first).apply(c.first), f2.applic(f.second).apply(c.second))
+    def applic[A, B](f: Product[F1, F2, A => B]) = (c: Product[F1, F2, A]) => {
+      val applic1: (F1[A]) => F1[B] = f1.applic(f.first)
+      Product[F1, F2, B](applic1.apply(c.first), f2.applic(f.second).apply(c.second))
+    }
   }
 
 }

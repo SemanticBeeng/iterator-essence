@@ -1,14 +1,14 @@
-package org.specs2.blog
-package iteratoressence
+package org.specs2.blog.iteratoressence.specs
 
-import scalaz._
-import Applicative._
-import Monoid._
-import Monad._
-import Traversable._
-import State._
+import org.specs2.blog.iteratoressence.scalaz.{Bin, Const, Leaf}
 
-class BinaryTreeTraversal extends org.specs2.mutable.Specification {  
+import scala.Traversable._
+import org.specs2.blog.iteratoressence.scalaz._
+import org.specs2.blog.iteratoressence.scalaz.Traversable._
+import org.specs2.blog.iteratoressence.scalaz.Applicative._
+import org.specs2.blog.iteratoressence.scalaz.State._
+
+class BinaryTreeTraversal extends org.specs2.mutable.Specification {
 
   "we can get the contents of a binary tree by traversing it" >> {
     val f = (i: Int) => List(i)
@@ -59,7 +59,7 @@ class BinaryTreeTraversal extends org.specs2.mutable.Specification {
     }
     "if there are too many elements" >> {
        shape.assemble(List(1, 2, 3)) must_== (List(3), Some(Bin(Leaf(1), Leaf(2))))
-    } 
+    }
     "if there are not enough elements" >> {
        shape.assemble(List(1)) must_== (List(), None)
     }
